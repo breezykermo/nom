@@ -14,13 +14,13 @@ if [ $# -gt 1 ]; then
 	if [ $1 == 'browse' ]; then
 		CONT_CMD="nom $@ && cd /tmp/nom/$2 && python -m http.server $PORT"
 		echo "Serving at http://localhost:$PORT..."
-		docker run -p $PORT:$PORT -v $VOL:/app/$2 $IMGNAME /bin/bash -c "$CONT_CMD"
+		docker run --rm -p $PORT:$PORT -v $VOL:/app/$2 $IMGNAME /bin/bash -c "$CONT_CMD"
 	fi
 	if [ $1 == 'view' ]; then
-		docker run -it -v $VOL:/app/$2 $IMGNAME /bin/bash
+		docker run --rm -it -v $VOL:/app/$2 $IMGNAME /bin/bash
 	fi
 fi
 
-docker run $IMGNAME nom $@
+docker run --rm $IMGNAME nom $@
 
 
