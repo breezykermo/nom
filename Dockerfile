@@ -4,7 +4,5 @@ WORKDIR /app
 ADD setup.py /app/setup.py
 ADD nom /app/nom
 RUN pip install --upgrade pip
-RUN pip install requests
-# RUN STATIC_DEPS=true pip install lxml
 RUN pip install --pre --upgrade .
 

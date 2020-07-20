@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+IMGNAME=nom
+
+if [[ "$(docker images -q $IMGNAME 2> /dev/null)" == "" ]]; then
+	echo 'Building nom image locally...'
+	docker build -t nom .
+	echo 'Nom image built.'
+fi
+
+if [ $# -gt 1 ]; then
+	VOL=$(pwd)/$2
+	echo $VOL
+fi
+
+docker run -it -v $VOL:/app/$2 $IMGNAME bash
+# docker run -v $VOL:/app/$1 $IMGNAME nom $@
+
+
